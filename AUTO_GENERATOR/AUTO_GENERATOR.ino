@@ -65,7 +65,7 @@ void errorMotorBlink(){  // ОШИБКА: двигатель не запусти
 	digitalWrite(OUT_STARTER_PIN, LLL);
 	digitalWrite(OUT_PODSOS_OFF_PIN, LLL);
 	digitalWrite(OUT_KONTAKTOR_PIN, LLL);
-	if(digitalRead(OUT_IGNITION_PIN);){
+	if(digitalRead(OUT_IGNITION_PIN)){
 		
 	digitalWrite(OUT_IGNITION_PIN, LLL);
 	}
@@ -83,7 +83,7 @@ void stopBlink(){  // АВАРИЙНЫЙ СТОП
 	digitalWrite(OUT_STARTER_PIN, LLL);
 	digitalWrite(OUT_PODSOS_OFF_PIN, LLL);
 	digitalWrite(OUT_KONTAKTOR_PIN, LLL);
-	if(digitalRead(OUT_IGNITION_PIN);){
+	if(digitalRead(OUT_IGNITION_PIN)){
 		
 		genStop();
 	}
