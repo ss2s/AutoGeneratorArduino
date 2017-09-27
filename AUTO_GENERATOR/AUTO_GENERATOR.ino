@@ -105,6 +105,7 @@ void genStart(){
 	blink(3);
 	digitalWrite(OUT_IGNITION_PIN, HHH);
 		delay(OPERATION_TIMEOUT);
+  Serial.println("podsos on");
 	digitalWrite(OUT_PODSOS_ON_PIN, HHH);
 		delay(PODSOS_TIMEOUT);
 	digitalWrite(OUT_PODSOS_ON_PIN, LLL);
@@ -119,15 +120,18 @@ void genStart(){
 			delay(OPERATION_TIMEOUT);
 			delay(OPERATION_TIMEOUT);
 			delay(OPERATION_TIMEOUT);
+     
 		chk_GENA = digitalRead(IN_GENA_PIN);
+    
 		if(chk_GENA == HIGH){
-		
+  
 	    	digitalWrite(OUT_PODSOS_OFF_PIN, HHH);
 	        	delay(PODSOS_TIMEOUT);
 	    	digitalWrite(OUT_PODSOS_OFF_PIN, LLL);
 	    	starterCount = ZAPUSK_COUNTER_VAL + 1;
         Serial.print("START OK  ");
         Serial.println(starterCount + 1);
+        Serial.println("podsos off");
 		}else{
 
 			blink();
