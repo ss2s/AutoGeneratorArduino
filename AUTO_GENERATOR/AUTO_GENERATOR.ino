@@ -1,5 +1,6 @@
 // АВТОЗАПУСК ГЕНЕРАТОРА
 // created by ss2s
+// https://github.com/ss2s/AutoGeneratorArduino
 
 // ***НАСТРОЙКА*** //
 
@@ -168,6 +169,9 @@ void setup() {
 	digitalWrite(LED_PIN, LOW);
 
 	Serial.begin(9600);
+	Serial.println("AUTO GENERATOR");
+	Serial.println("created by ss2s");
+	Serial.println("https://github.com/ss2s/AutoGeneratorArduino");
 }
 
 void loop() {
