@@ -109,9 +109,9 @@ void genStart(){
 		delay(PODSOS_TIMEOUT);
 	digitalWrite(OUT_PODSOS_ON_PIN, LLL);
 		delay(OPERATION_TIMEOUT);
-	while(ZAPUSK_COUNTER_VAL > starterCount){
+	while(starterCount < ZAPUSK_COUNTER_VAL - 1){
 
-	    blink(2);
+	    blink(2); 
 	    digitalWrite(OUT_STARTER_PIN, HHH);
 			delay(STARTER_TIMEOUT);
 		digitalWrite(OUT_STARTER_PIN, LLL);
@@ -126,12 +126,14 @@ void genStart(){
 	        	delay(PODSOS_TIMEOUT);
 	    	digitalWrite(OUT_PODSOS_OFF_PIN, LLL);
 	    	starterCount = ZAPUSK_COUNTER_VAL + 1;
+        Serial.print("START OK  ");
+        Serial.println(starterCount + 1);
 		}else{
 
 			blink();
 			starterCount ++;
 			delay(RELAX_TIMEOUT);
-			Serial.println(starterCount);
+			Serial.println(starterCount+1);
 		}
 	}
 
@@ -187,6 +189,13 @@ void loop() {
 	chk_GENA = digitalRead(IN_GENA_PIN);
 	chk_STOP = digitalRead(IN_STOP_PIN);
 
+  Serial.print("CETb ");
+  Serial.print(chk_CETb);
+  Serial.print("  GENA ");
+  Serial.print(chk_GENA);
+  Serial.print("  STOP ");
+  Serial.println(chk_STOP);
+
 	if(chk_CETb == LOW && chk_GENA == LOW && chk_STOP == HIGH){
 
 			delay(5);
@@ -222,6 +231,7 @@ void loop() {
 
 		if(chk_CETb == HIGH && chk_GENA == HIGH && chk_STOP == HIGH){
 
+        Serial.println("poyavilas CETb");
 		    delay(KONT_OFF_TIMEOUT);
 		    digitalWrite(OUT_KONTAKTOR_PIN, LLL);
 		    	Serial.println("KONATAKTOR OFF");
@@ -242,7 +252,7 @@ void loop() {
 	    	}
 		}
 	}
-
+	
 	delay(LOOP_TIMEOUT);
 }
 
