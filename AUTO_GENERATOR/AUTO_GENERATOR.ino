@@ -156,6 +156,9 @@ void genStart(){
 void genStop(){
 
 	blink(4);
+	Serial.print(": ");
+    Serial.print(OFF_IGNITION_TIMEOUT / 1000);
+    Serial.println(" c");
 		delay(OFF_IGNITION_TIMEOUT);
 	blink(2);
 	Serial.println("STOP GENERATORA");
@@ -218,7 +221,10 @@ void loop() {
 				chk_CETb = digitalRead(IN_CETb_PIN);
 				chk_GENA = digitalRead(IN_GENA_PIN);
 				chk_STOP = digitalRead(IN_STOP_PIN);
-				if(chk_CETb == LOW && chk_GENA == HIGH & chk_STOP == HIGH){ 
+				if(chk_CETb == LOW && chk_GENA == HIGH & chk_STOP == HIGH){
+					Serial.print(": ");
+    				Serial.print(PRE_KONT_TIMEOUT / 1000);
+    				Serial.println(" c");
 						delay(PRE_KONT_TIMEOUT);
 					digitalWrite(OUT_KONTAKTOR_PIN, HHH);
 						Serial.println("CONTAKTOR ON");
@@ -236,6 +242,9 @@ void loop() {
 		if(chk_CETb == HIGH && chk_GENA == HIGH && chk_STOP == HIGH){
 
         Serial.println("poyavilas CETb");
+        Serial.print(": ");
+        Serial.print(KONT_OFF_TIMEOUT / 1000);
+        Serial.println(" c");
 		    delay(KONT_OFF_TIMEOUT);
 		    digitalWrite(OUT_KONTAKTOR_PIN, LLL);
 		    	Serial.println("KONATAKTOR OFF");
