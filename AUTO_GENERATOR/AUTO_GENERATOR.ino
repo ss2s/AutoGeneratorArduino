@@ -66,11 +66,27 @@ void errorBlink(){
 	digitalWrite(OUT_KONTAKTOR_PIN, LLL);
 
 	while(1){
-	Serial.println("ERROR");
+	Serial.println("ERROR MOTOR");
 		blink(5);
-		delay(5000);
+		delay(3000);
 	}
 }
+
+void stopBlink(){
+
+	digitalWrite(OUT_IGNITION_PIN, LLL);
+	digitalWrite(OUT_PODSOS_ON_PIN, LLL);
+	digitalWrite(OUT_STARTER_PIN, LLL);
+	digitalWrite(OUT_PODSOS_OFF_PIN, LLL);
+	digitalWrite(OUT_KONTAKTOR_PIN, LLL);
+
+	while(1){
+	Serial.println("ERROR STOP");
+		blink(2);
+		delay(1000);
+	}
+}
+
 
 void genStart(){
 
@@ -210,7 +226,7 @@ void loop() {
 	    	chk_STOP = digitalRead(IN_STOP_PIN);
 
 	    	if(chk_STOP == LOW){
-	    		errorBlink();
+	    		stopBlink();
 	    	}
 		}
 	}
