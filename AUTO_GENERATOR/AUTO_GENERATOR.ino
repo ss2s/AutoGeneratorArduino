@@ -59,13 +59,16 @@ void blink(int bCount = 1){
 
 }
 
-void errorBlink(){
+void errorMotorBlink(){  // ОШИБКА: двигатель не запустился после (n) попыток
 
-	digitalWrite(OUT_IGNITION_PIN, LLL);
 	digitalWrite(OUT_PODSOS_ON_PIN, LLL);
 	digitalWrite(OUT_STARTER_PIN, LLL);
 	digitalWrite(OUT_PODSOS_OFF_PIN, LLL);
 	digitalWrite(OUT_KONTAKTOR_PIN, LLL);
+	if(digitalRead(OUT_IGNITION_PIN);){
+		
+	digitalWrite(OUT_IGNITION_PIN, LLL);
+	}
 
 	while(1){
 	Serial.println("ERROR MOTOR");
@@ -74,13 +77,17 @@ void errorBlink(){
 	}
 }
 
-void stopBlink(){
+void stopBlink(){  // АВАРИЙНЫЙ СТОП
 
-	digitalWrite(OUT_IGNITION_PIN, LLL);
 	digitalWrite(OUT_PODSOS_ON_PIN, LLL);
 	digitalWrite(OUT_STARTER_PIN, LLL);
 	digitalWrite(OUT_PODSOS_OFF_PIN, LLL);
 	digitalWrite(OUT_KONTAKTOR_PIN, LLL);
+	if(digitalRead(OUT_IGNITION_PIN);){
+		
+		genStop();
+	}
+
 
 	while(1){
 	Serial.println("ERROR STOP");
@@ -133,7 +140,7 @@ void genStart(){
 		delay(5);
 		chk_GENA = digitalRead(IN_GENA_PIN);
 	    if(chk_GENA == LOW){
-	    	errorBlink();
+	    	errorMotorBlink();
 		}
 	}
 
