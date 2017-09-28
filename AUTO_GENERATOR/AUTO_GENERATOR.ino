@@ -165,17 +165,17 @@ void genStart(){
 
 }
 
-void genStop(){
+// void genStop(){
 
-	blink(4);
-	Serial.print(": ");
-    Serial.print(OFF_IGNITION_TIMEOUT / 1000);
-    Serial.println(" c");
-		delay(OFF_IGNITION_TIMEOUT);
-	blink(2);
-	Serial.println("STOP GENERATORA");
-	digitalWrite(OUT_IGNITION_PIN, LLL);
-}
+// 	blink(4);
+// 	Serial.print(": ");
+//     Serial.print(OFF_IGNITION_TIMEOUT / 1000);
+//     Serial.println(" c");
+// 		delay(OFF_IGNITION_TIMEOUT);
+// 	blink(2);
+// 	Serial.println("STOP GENERATORA");
+// 	digitalWrite(OUT_IGNITION_PIN, LLL);
+// }
 
 void setup() {
 
