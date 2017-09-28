@@ -44,8 +44,8 @@
 
 // настройка реле (не трогать)
 // если реле управляется 1
-#define HHH 1
-#define LLL 0
+///#define HHH 1
+///#define LLL 0
 // если реле управляется 0
 //#define HHH 0
 //#define LLL 1
