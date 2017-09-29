@@ -9,10 +9,12 @@
 
 // ***НАСТРОЙКА*** //
 
+//для настройки изменять цифры
+
 
 // РАСПИНОВКА
 #define IN_CETb_PIN 2              // ВХОД 5в СЕТЬ
-#define IN_GENA_PIN 3              // ВЧОД 5в ГЕНЕРАТОР
+#define IN_GENA_PIN 3              // ВХОД 5в ГЕНЕРАТОР
 #define OUT_IGNITION_PIN 4         // РЕЛЕ ЗАЖИГАНИЯ
 #define OUT_PODSOS_ON_PIN 5        // РЕЛЕ ВКЛЮЧЕНИЯ ПОДСОСА
 #define OUT_STARTER_PIN 6          // РЕЛЕ СТАРТЕРА
@@ -25,7 +27,7 @@
 #define PODSOS_TIMEOUT 800         // ВРЕМЯ РАБОТЫ ПРИВОДА ПОДСОСА 0.8 с
 #define STARTER_TIMEOUT 2000       // ВРЕМЯ РАБОТЫ СТАРТЕРА 2 с
 #define OFF_PODSOS_TIMEOUT 2000    // ВРЕМЯ ДО ЗАКРЫТИЯ ПОДСОСА ПОСЛЕ ЗАПУСКА 2 с
-#define PRE_KONT_TIMEOUT 15000     // ЗАДЕРЖКА ПЕРЕД ВКЛЮЧЕНИЕМ КОНТАКТОРА, ПОСЛЕ ЗАКРЫТИЯ ПОДСОСА 15 с
+#define PRE_KONT_TIMEOUT 15000     // ЗАДЕРЖКА ПЕРЕД ВКЛЮЧЕНИЕМ КОНТАКТОРА, ПОСЛЕ ЗАКРЫТИЯ ПОДСОСА (ПРОГРЕВ ДВИГАТЕЛЯ) 15 с
 #define KONT_OFF_TIMEOUT 10000     // ЗАДЕРЖКА ПЕРЕД ВЫКЛЮЧЕНИЕМ КОНТАКТОРА, ПОСЛЕ ВОССТАНОВЛЕНИЯ СЕТИ 10 с
 #define OFF_IGNITION_TIMEOUT 30000 // ЗАДЕРЖКА ВЫКЛЮЧЕНИЯ ЗАЖИГАНИЯ 30 с
 #define OPERATION_TIMEOUT 500      // ЗАДЕРЖКА МЕЖДУ ОПЕРАЦИЯМИ 0.5 с
@@ -228,12 +230,12 @@ void loop() {
 	    	chk_CETb = digitalRead(IN_CETb_PIN);
 			chk_GENA = digitalRead(IN_GENA_PIN);
 			chk_STOP = digitalRead(IN_STOP_PIN);
-			if(chk_CETb == LOW && chk_GENA == HIGH & chk_STOP == HIGH){ 
+			if(chk_CETb == LOW && chk_GENA == HIGH && chk_STOP == HIGH){ 
 					delay(5);
 				chk_CETb = digitalRead(IN_CETb_PIN);
 				chk_GENA = digitalRead(IN_GENA_PIN);
 				chk_STOP = digitalRead(IN_STOP_PIN);
-				if(chk_CETb == LOW && chk_GENA == HIGH & chk_STOP == HIGH){
+				if(chk_CETb == LOW && chk_GENA == HIGH && chk_STOP == HIGH){
 					Serial.print(": ");
     				Serial.print(PRE_KONT_TIMEOUT / 1000);
     				Serial.println(" c");
@@ -241,7 +243,10 @@ void loop() {
 					digitalWrite(OUT_KONTAKTOR_PIN, HHH);
 						Serial.println("CONTAKTOR ON");
    
-				}   
+				} 
+				else if(chk_CETb == HIGH && chk_GENA == HIGH){
+					genStop();
+				} 
 			}
 		}
 	}else if(chk_CETb == HIGH && chk_GENA == HIGH && chk_STOP == HIGH){
