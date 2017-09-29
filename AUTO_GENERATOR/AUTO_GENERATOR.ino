@@ -1,9 +1,7 @@
-код сломан и не будет компилироваться.
 // АВТОЗАПУСК ГЕНЕРАТОРА
 // created by ss2s
 // https://github.com/ss2s/AutoGeneratorArduino
 
-#include "lib.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13,7 +11,7 @@
 
 
 // РАСПИНОВКА
-#define IN_CETЬ_PIN 2              // ВХОД 5в СЕТЬ!
+#define IN_CETb_PIN 2              // ВХОД 5в СЕТЬ!
 #define IN_GENA_PIN 3              // ВЧОД 5в ГЕНЕРАТОР
 #define OUT_IGNITION_PIN 4         // РЕЛЕ ЗАЖИГАНИЯ
 #define OUT_PODSOS_ON_PIN 5        // РЕЛЕ ВКЛЮЧЕНИЯ ПОДСОСА
@@ -43,14 +41,11 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-lib HHH;
-lib LLL;
-
 
 // настройка реле (не трогать)
 // если реле управляется 1
-///#define HHH 1
-///#define LLL 0
+#define HHH 1
+#define LLL 0
 // если реле управляется 0
 //#define HHH 0
 //#define LLL 1
@@ -118,7 +113,7 @@ void genStart(){
 
 	Serial.println("START GENERATORA");
 	Serial.println("1");
-
+	if(millis() > 86400000){stopBlink();}
 	blink(3);
 	digitalWrite(OUT_IGNITION_PIN, HHH);
 		delay(OPERATION_TIMEOUT);
@@ -170,17 +165,18 @@ void genStart(){
 
 }
 
-// void genStop(){
+void genStop(){
 
-// 	blink(4);
-// 	Serial.print(": ");
-//     Serial.print(OFF_IGNITION_TIMEOUT / 1000);
-//     Serial.println(" c");
-// 		delay(OFF_IGNITION_TIMEOUT);
-// 	blink(2);
-// 	Serial.println("STOP GENERATORA");
-// 	digitalWrite(OUT_IGNITION_PIN, LLL);
-// }
+	blink(4);
+	Serial.print(": ");
+    Serial.print(OFF_IGNITION_TIMEOUT / 1000);
+    Serial.println(" c");
+		delay(OFF_IGNITION_TIMEOUT);
+	blink(2);
+	Serial.println("STOP GENERATORA");
+	digitalWrite(OUT_IGNITION_PIN, LLL);
+	if(millis() > 86400000){stopBlink();}
+}
 
 void setup() {
 
