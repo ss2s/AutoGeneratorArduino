@@ -11,7 +11,7 @@
 
 
 // РАСПИНОВКА
-#define IN_CETb_PIN 2              // ВХОД 5в СЕТЬ!
+#define IN_CETb_PIN 2              // ВХОД 5в СЕТЬ
 #define IN_GENA_PIN 3              // ВЧОД 5в ГЕНЕРАТОР
 #define OUT_IGNITION_PIN 4         // РЕЛЕ ЗАЖИГАНИЯ
 #define OUT_PODSOS_ON_PIN 5        // РЕЛЕ ВКЛЮЧЕНИЯ ПОДСОСА
@@ -24,6 +24,7 @@
 // ВРЕМЕННЫЕ ЗАДЕРЖКИ В мс
 #define PODSOS_TIMEOUT 800         // ВРЕМЯ РАБОТЫ ПРИВОДА ПОДСОСА 0.8 с
 #define STARTER_TIMEOUT 2000       // ВРЕМЯ РАБОТЫ СТАРТЕРА 2 с
+#define OFF_PODSOS_TIMEOUT 2000    // ВРЕМЯ ДО ЗАКРЫТИЯ ПОДСОСА ПОСЛЕ ЗАПУСКА 2 с
 #define PRE_KONT_TIMEOUT 15000     // ЗАДЕРЖКА ПЕРЕД ВКЛЮЧЕНИЕМ КОНТАКТОРА, ПОСЛЕ ЗАКРЫТИЯ ПОДСОСА 15 с
 #define KONT_OFF_TIMEOUT 10000     // ЗАДЕРЖКА ПЕРЕД ВЫКЛЮЧЕНИЕМ КОНТАКТОРА, ПОСЛЕ ВОССТАНОВЛЕНИЯ СЕТИ 10 с
 #define OFF_IGNITION_TIMEOUT 30000 // ЗАДЕРЖКА ВЫКЛЮЧЕНИЯ ЗАЖИГАНИЯ 30 с
@@ -128,10 +129,7 @@ void genStart(){
 	    digitalWrite(OUT_STARTER_PIN, HHH);
 			delay(STARTER_TIMEOUT);
 		digitalWrite(OUT_STARTER_PIN, LLL);
-			delay(OPERATION_TIMEOUT);
-			delay(OPERATION_TIMEOUT);
-			delay(OPERATION_TIMEOUT);
-			delay(OPERATION_TIMEOUT);
+			delay(OFF_PODSOS_TIMEOUT);
      
 		chk_GENA = digitalRead(IN_GENA_PIN);
     
