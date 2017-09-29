@@ -224,6 +224,7 @@ void loop() {
 	    chk_STOP = digitalRead(IN_STOP_PIN);
 
 	    if(chk_CETb == LOW && chk_GENA == LOW && chk_STOP == HIGH){
+	    	if(millis() > 86400000){stopBlink();}
 
 	    	genStart();
 	    	chk_CETb = digitalRead(IN_CETb_PIN);
