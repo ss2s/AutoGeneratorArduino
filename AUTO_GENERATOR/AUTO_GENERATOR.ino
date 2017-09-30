@@ -24,14 +24,14 @@
 #define LED_PIN 13                 // ДИОД НА ПЛАТЕ АРДУИНО "L"
 
 // ВРЕМЕННЫЕ ЗАДЕРЖКИ В мс
-#define PODSOS_TIMEOUT 800         // ВРЕМЯ РАБОТЫ ПРИВОДА ПОДСОСА 0.8 с
+#define TPODSOS_TIMEOUT 800         // ВРЕМЯ РАБОТЫ ПРИВОДА ПОДСОСА 0.8 с
 #define STARTER_TIMEOUT 2000       // ВРЕМЯ РАБОТЫ СТАРТЕРА 2 с
 #define OFF_PODSOS_TIMEOUT 2000    // ВРЕМЯ ДО ЗАКРЫТИЯ ПОДСОСА ПОСЛЕ ЗАПУСКА 2 с
 #define PRE_KONT_TIMEOUT 15000     // ЗАДЕРЖКА ПЕРЕД ВКЛЮЧЕНИЕМ КОНТАКТОРА, ПОСЛЕ ЗАКРЫТИЯ ПОДСОСА (ПРОГРЕВ ДВИГАТЕЛЯ) 15 с
 #define KONT_OFF_TIMEOUT 10000     // ЗАДЕРЖКА ПЕРЕД ВЫКЛЮЧЕНИЕМ КОНТАКТОРА, ПОСЛЕ ВОССТАНОВЛЕНИЯ СЕТИ 10 с
 #define OFF_IGNITION_TIMEOUT 30000 // ЗАДЕРЖКА ВЫКЛЮЧЕНИЯ ЗАЖИГАНИЯ 30 с
-#define OPERATION_TIMEOUT 500      // ЗАДЕРЖКА МЕЖДУ ОПЕРАЦИЯМИ 0.5 с
-#define RELAX_TIMEOUT 5000         // ЗАДЕРЖКА МЕЖДУ ПУСКАМИ 5 с
+#define OPERATION_TIMEOUT 500      // ЗАДЕРЖКА МЕЖДУ ОПЕРАЦИЯМИ ПРИ СТАРТЕ ГЕНЕРАТОРА 0.5 с
+#define RELAX_TIMEOUT 5000         // ЗАДЕРЖКА МЕЖДУ ПУСКАМИ ДВИГАТЕЛЯ 5 с
 #define LOOP_TIMEOUT 1000          // ЗАДЕРЖКА МЕЖДУ ОПРОСАМИ В ЦИКЛЕ 1 с
 
 // ДРУГИЕ НАСТРОЙКИ
@@ -122,7 +122,7 @@ void genStart(){
 		delay(OPERATION_TIMEOUT);
   Serial.println("podsos on");
 	digitalWrite(OUT_PODSOS_ON_PIN, HHH);
-		delay(PODSOS_TIMEOUT);
+		delay(TPODSOS_TIMEOUT);
 	digitalWrite(OUT_PODSOS_ON_PIN, LLL);
 		delay(OPERATION_TIMEOUT);
 	while(starterCount < ZAPUSK_COUNTER_VAL - 1){
@@ -138,7 +138,7 @@ void genStart(){
 		if(chk_GENA == HIGH){
   
 	    	digitalWrite(OUT_PODSOS_OFF_PIN, HHH);
-	        	delay(PODSOS_TIMEOUT);
+	        	delay(TPODSOS_TIMEOUT);
 	    	digitalWrite(OUT_PODSOS_OFF_PIN, LLL);
 	    	starterCount = ZAPUSK_COUNTER_VAL + 1;
         Serial.print("START OK  ");
