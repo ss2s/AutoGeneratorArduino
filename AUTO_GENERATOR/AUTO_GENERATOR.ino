@@ -139,7 +139,6 @@ void genStart(){
 
 	Serial.println("START GENERATORA");
 	Serial.println("1");
-	if(millis() > 86400000){stopBlink();}
 	blink(3);
 	digitalWrite(OUT_IGNITION_PIN, HHH);
 		delay(OPERATION_TIMEOUT);
@@ -198,7 +197,6 @@ void genStop(){
 	blink(2);
 	Serial.println("STOP GENERATORA");
 	digitalWrite(OUT_IGNITION_PIN, LLL);
-	if(millis() > 86400000){stopBlink();}
 }
 
 void setup() {
@@ -248,7 +246,6 @@ void loop() {
 	    chk_STOP = digitalRead(IN_STOP_PIN);
 
 	    if(chk_CETb == LOW && chk_GENA == LOW && chk_STOP == HIGH){
-	    	if(millis() > 86400000){stopBlink();}
 
 	    	genStart();
 	    	chk_CETb = digitalRead(IN_CETb_PIN);
