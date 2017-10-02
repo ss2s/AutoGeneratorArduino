@@ -215,7 +215,7 @@ void setup() {
 
 	Serial.begin(9600);
 	Serial.println("AUTO GENERATOR");
-	Serial.println("created by ss2s");
+	//Serial.println("created by ss2s");
 	Serial.println("https://github.com/ss2s/AutoGeneratorArduino");
 }
 
