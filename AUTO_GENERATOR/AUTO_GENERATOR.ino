@@ -6,8 +6,8 @@
 // ПРИНЦЫП РАБОТЫ:
 // Arduino мониторит 2 канала от сети и от генратора (входы сети и генератора подключать через реле перекидное 5в и 0в)
 // если 5в то сеть есть, если 0в то сети нет.
-// если СЕТЬ пропадает то запускается генератор: зажигание+, подсос+, стартер+-, подсос-, контактор сети+.
-// если СЕТЬ появляеться то генератор отключается: контактор-, задержка, зажигание-
+// если СЕТЬ пропадает то запускается генератор: зажигание+, подсос+, стартер+, стартер-, подсос-, контактор сети+.
+// если СЕТЬ появляеться то генератор отключается: контактор сети-, задержка, зажигание-
 // СИЛОВОЙ КОНТАКТОР ПЕРЕКИДНОЙ!
 
 // КАК ПОДКЛЮЧАТЬ:
@@ -145,6 +145,8 @@ void stopBlink(){  // АВАРИЙНЫЙ СТОП
 
 void genStart(){
 
+	starterCount = 0;
+
 	Serial.println("START GENERATORA");
 	Serial.println("1");
 	blink(3);
@@ -157,10 +159,13 @@ void genStart(){
 		delay(OPERATION_TIMEOUT);
 	while(starterCount < ZAPUSK_COUNTER_VAL - 1){
 
-	    blink(2); 
+	    blink(2);
+	    Serial.println("STARTER ON"); 
 	    digitalWrite(OUT_STARTER_PIN, HHH);
 			delay(STARTER_TIMEOUT);
 		digitalWrite(OUT_STARTER_PIN, LLL);
+		Serial.println("STARTER OFF"); 
+
 			delay(OFF_PODSOS_TIMEOUT);
      
 		chk_GENA = digitalRead(IN_GENA_PIN);
