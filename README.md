@@ -1,8 +1,11 @@
 # AutoGeneratorArduino
+#### created by ss2s
+<https://github.com/ss2s>
 ```
 // АВТОЗАПУСК ГЕНЕРАТОРА на Arduino
 // АВР автоматический ввод резерва
 // created by ss2s
+// https://github.com/ss2s
 // https://github.com/ss2s/AutoGeneratorArduino
 
 // КАК ПОДКЛЮЧАТЬ:
