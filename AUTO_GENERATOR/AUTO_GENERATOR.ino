@@ -203,9 +203,9 @@ void genStart(){  // функция запуска генератора
 	    digitalWrite(OUT_STARTER_PIN, HHH);
 
 	    if(SET_STARTER_TIMER_FUNC > 0){
-	    	starterChekExt;
+	    	starterChekExt();
 	    }else{
-	    	starterChek;
+	    	starterChek();
 	    }
 	    
 		digitalWrite(OUT_STARTER_PIN, LLL);
